@@ -1,0 +1,160 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><title>Contract Tests</title><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui" name="viewport"><link href="node_modules/reveal.js/css/reveal.css" rel="stylesheet"><link rel="stylesheet" href="node_modules/reveal.js/css/theme/black.css" id="theme"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"><link href="node_modules/reveal.js/lib/css/zenburn.css" rel="stylesheet"><script>var link = document.createElement( 'link' );
+link.rel = 'stylesheet';
+link.type = 'text/css';
+link.href = window.location.search.match( /print-pdf/gi ) ? "node_modules/reveal.js/css/print/pdf.css" : "node_modules/reveal.js/css/print/paper.css";
+document.getElementsByTagName( 'head' )[0].appendChild( link );</script><!--[if lt IE 9]><script src="node_modules/reveal.js/lib/js/html5shiv.js"></script><![endif]--></head><body><div class="reveal"><div class="slides"><section class="title" data-state="title"><h1>Contract Tests</h1></section><section id="what_is_contract_testing"><h2>What is Contract testing</h2><div class="quoteblock"><blockquote><div class="paragraph"><p>An approach that captures the interactions between two components and serialises them into a contract, which can then be used to verify that both parties adhere to it.</p></div></blockquote><div class="attribution">&#8212; this quote is looking for its author</div></div></section>
+<section id="handled_today"><h2>Handled Today?</h2><div class="ulist"><ul><li><p>Lets do a v2/</p></li><li><p>Not at all <em>aka</em> commit and pray</p></li><li><p>Manual research into client code</p></li><li><p>Hand written Test Doubles</p></li><li><p>Integration tests across services</p></li><li><p>Integration environments</p></li><li><p>End to End tests across the whole system</p></li></ul></div></section>
+<section id="integration_tests"><div class="quoteblock"><blockquote><div class="paragraph"><p>Integrated tests are a scam — a self-replicating virus that threatens to infect your code base, your project, and your team with endless pain and suffering.</p></div>
+<div class="paragraph"><p>... I use the term integrated test to mean any test whose result (pass or fail) depends on the correctness of the implementation of more than one piece of non-trivial behavior.</p></div></blockquote><div class="attribution"><cite>October 16, 2010 <a href="http://blog.thecodewhisperer.com/permalink/integrated-tests-are-a-scam">Integrated Tests Are a Scam</a></cite><br>&#8212; J.B Rainsberger</div></div>
+<aside class="notes"><div class="paragraph"><p>Car repair example Karlsruhe-Frankfurt
+Login Example</p></div></aside></section>
+<section><section id="a_href_http_pact_io_target_blank_pact_io_a"><h2><a href="http://pact.io" target="_blank">pact.io</a></h2><div class="quoteblock"><blockquote><div class="paragraph"><p>Enables consumer driven contract testing, providing a mock service and DSL for the consumer project, and interaction playback and verification for the service provider project.</p></div></blockquote><div class="attribution">&#8212; the pact website</div></div><aside class="notes"><div class="ulist"><ul><li><p>A testing tool that helps you write Contracts, and guarantees those Contracts are satisfied.</p></li><li><p>break up your integration tests into unit tests</p></li><li><p>the ideas from <a href="https://martinfowler.com/articles/consumerDrivenContracts.html" target="_blank">consumer driven contracts</a></p></li><li><p><a href="https://martinfowler.com/bliki/TolerantReader.html" target="_blank">Tolerant Reader</a></p></li><li><p><a href="https://en.wikipedia.org/wiki/Robustness_principle" target="_blank">Postal&#8217;s law</a></p></li></ul></div></aside></section><section id="step_1" data-background-image="../images/pact_step_1.png" data-background-size="contain"></section><section id="step_2" data-background-image="../images/pact_step_2.png" data-background-size="contain"></section></section>
+<section><section id="contracts_should_be_about_catching"><h2>Contracts should be about catching &#8230;&#8203;</h2><div class="ulist"><ul><li><p>bugs in the consumer</p></li><li><p>misunderstanding from the consumer about end-points or payload</p></li><li><p>breaking changes by the provider on end-points or payload</p></li></ul></div><div class="paragraph"><p>Pact scenarios should not dig into the business logic of the Provider.</p></div><aside class="notes"><div class="paragraph"><p>see <a href="https://docs.pact.io/best_practices/contract_tests_not_functional_tests.html" class="bare">https://docs.pact.io/best_practices/contract_tests_not_functional_tests.html</a> for details</p></div></aside></section><section id="what_can_be_improved"><h2>What can be improved</h2><div class="ulist"><ul><li><p>Feature parity between implementations (v2, v3, v4)</p></li><li><p>Documentation (pact-foundation consolidation)</p></li><li><p><a href="https://github.com/DiUS/pact-jvm" target="_blank">Pact-Jvm</a></p><div class="ulist"><ul><li><p>is implemented in Java/Scala/Kotlin/Groovy</p></li><li><p>configuration via system properties</p></li><li><p>documentation spread around in Readme.md files</p></li></ul></div></li></ul></div>
+<aside class="notes"><div class="ulist"><ul><li><p>Super responsive on all channels</p></li><li><p>Consumer passing arguments for state changes works only on pact-jvm?</p></li></ul></div></aside></section><section id="what_to_gain_by_using_pact_1"><h2>What to gain by using pact (1)</h2><div class="ulist"><ul><li><p>No more integration tests !?</p></li><li><p>Generated Test Doubles</p></li><li><p>Knowing your clients</p><div class="ulist"><ul><li><p>what properties are they using</p></li><li><p>who to contact in case of changes</p></li><li><p>you get people talking and clean up wrong assumptions</p></li></ul></div></li></ul></div></section><section id="what_to_gain_by_using_pact_2"><h2>What to gain by using pact (2)</h2><div class="ulist"><ul><li><p>Pact-Broker as &#8230;&#8203;</p><div class="ulist"><ul><li><p>contract repository</p></li><li><p>source of truth for pre deployment checks</p></li><li><p>displaying service dependencies</p></li></ul></div></li></ul></div></section></section>
+<section><section id="i_m_intrigued_what_next"><h2>I&#8217;m intrigued, what next</h2><div class="ulist"><ul><li><p><a href="http://pact.io" target="_blank">pact.io</a></p></li><li><p><a href="https://www.youtube.com/watch?v=-6x6XBDf9sQ" target="_blank">Verifying Microservice Integrations with Contract Testing</a></p></li><li><p><a href="https://docs.pact.io/documentation/implementation_guides.html" target="_blank">Language specific workshops</a></p></li><li><p><a href="https://github.com/pact-foundation" target="_blank">pact-foundation on github</a></p></li></ul></div></section><section id="where_to_get_help"><h2>Where to get help</h2><div class="ulist"><ul><li><p><a href="https://twitter.com/pact_up" target="_blank">@pact_up</a></p></li><li><p><a href="https://stackoverflow.com/questions/tagged/pact" target="_blank">StackOverflow</a></p></li><li><p><a href="https://gitter.im/DiUS/pact-jvm" target="_blank">Gitter for pact-jvm</a></p></li><li><p><a href="https://gitter.im/realestate-com-au/pact" target="_blank">Gitter for pact-ruby</a></p></li><li><p><a href="https://groups.google.com/forum/#!forum/pact-support" target="_blank">Google Group</a></p></li></ul></div></section></section>
+<section><div class="paragraph"><p>That&#8217;s it!<br>
+Any Questions?</p></div></section>
+<section id="beyond_consumer_driven_contracts"><h2>Beyond Consumer Driven Contracts</h2><div class="paragraph"><p>Session offer from Nicole for April</p></div></section>
+<section><section id="melting_pot" data-background-image="../images/bumper.jpg" data-background-size="contain"></section><section id="pact_matchers"><h2>Pact: Matchers</h2><div class="paragraph"><p>Request matching (when does the mock provider return the expected values)
+* no unexpected values in the json body or query string
+* unexpected headers are allowed</p></div>
+<div class="paragraph"><p>Response matching (during verification on the provider side)
+* make sure the types are matching (Array, String, boolean, Fixnum, &#8230;&#8203;)
+* unexpected values in JSON are ignored
+* it is not possible to verify that something is not there.</p></div>
+<aside class="notes"><div class="paragraph"><p><a href="https://docs.pact.io/documentation/matching.html">matching</a>
+<a href="https://docs.pact.io/documentation/gotchas.html">gotchas</a>
+<a href="https://github.com/DiUS/pact-jvm/tree/master/pact-jvm-consumer-junit" class="bare">https://github.com/DiUS/pact-jvm/tree/master/pact-jvm-consumer-junit</a>
+<a href="https://github.com/DiUS/pact-jvm/wiki/Matching#matcher-path-expressions" class="bare">https://github.com/DiUS/pact-jvm/wiki/Matching#matcher-path-expressions</a></p></div></aside></section><section id="pact_a_href_https_docs_pact_io_documentation_how_does_pact_work_html_target_blank_terminology_a"><h2>Pact: <a href="https://docs.pact.io/documentation/how_does_pact_work.html" target="_blank">Terminology</a></h2><div class="dlist"><dl><dt class="hdlist1">Consumer</dt><dd><p>A component that initiates a HTTP request to another component (the service Provider).</p></dd><dt class="hdlist1">Provider</dt><dd><p>A server that responds to an HTTP request from another component (the service Consumer).</p></dd><dt class="hdlist1">Interaction</dt><dd><p>One invocation of the Provider by the Consumer including send arguments and expected response.</p></dd><dt class="hdlist1">Contract</dt><dd><p>A file containing the JSON serialised interactions (requests and responses) that were defined in the Consumer tests. (aka the pact file)</p></dd></dl></div>
+<aside class="notes"><div class="paragraph"><p><a href="https://www.w3.org/2001/tag/doc/versioning">Extending and Versioning Languages: Terminology</a></p></div></aside></section><section id="pact_example"><h2>Pact: Example</h2><div class="paragraph"><p>"Given &#8230;&#8203; a request for &#8230;&#8203; will return &#8230;&#8203;"</p></div>
+<div class="listingblock"><div class="content"><pre class="highlight"><code>Given an alligator with the name Mary exists *
+Upon receiving a request to retrieve an alligator by name ** from Some Consumer
+With {"method" : "get", "path" : "/alligators/Mary" }
+Some Provider will respond with { "status" : 200, ...}
+
+* This is the provider state
+** This is the request description</code></pre></div></div>
+<aside class="notes"><div class="paragraph"><p>Pact is essentially a unit testing framework using specification by example.</p></div></aside></section><section id="pact_verification"><h2>Pact: Verification</h2><div class="paragraph"><p>would add a caution to make sure you are not affecting behavior with your mocks and stubs.
+This is about running the service as is</p></div></section><section id="pact_how_to_keep_the_pact_file_in_sync"><h2>Pact: How to keep the pact file in sync?</h2><div class="paragraph"><p>Instead of having to build a test environment running with two servers and databases to test that our interaction between our source system and our event API works, we now have two fast tests that achieve the same result.
+As long as we maintain the pact file between the two systems, we can be reasonably sure that our integration is working correctly.</p></div>
+<div class="paragraph"><p>There is a number of ways of maintaining the pact file.
+We can get our consumer build to publish the pact file to the CI server as a build artifact.
+The pact verification task supports loading the pact file from a URL.
+That way we can get it to always use the pact file from the latest successful build.</p></div>
+<div class="paragraph"><p>There is also a Pact Broker project that provides a repository of pact files.
+It allows you to be able to verify your providers against pact files from different versions of your consumer.</p></div></section><section id="a_href_https_github_com_pact_foundation_pact_broker_pact_broker_a"><h2><a href="https://github.com/pact-foundation/pact_broker">Pact Broker</a></h2><div class="ulist"><ul><li><p>keep pacts in sync</p></li><li><p>map the relationships between your services</p></li><li><p>track compatibility across different versions</p></li><li><p><a href="https://pact.dius.com.au/">free hosted pact brokers</a></p></li></ul></div>
+<div class="paragraph"><p>verification results are published back to the broker
+- <a href="https://github.com/pact-foundation/pact_broker">pact-broker on github</a>
+- <a href="https://github.com/pact-foundation/pact_broker/wiki/Overview" class="bare">https://github.com/pact-foundation/pact_broker/wiki/Overview</a>
+- <a href="https://github.com/pact-foundation/pact_broker/wiki/Using-tags" class="bare">https://github.com/pact-foundation/pact_broker/wiki/Using-tags</a>
+- <a href="https://github.com/pact-foundation/pact_broker/wiki/How-to-ensure-backwards-compatibility-by-tagging-pacts" class="bare">https://github.com/pact-foundation/pact_broker/wiki/How-to-ensure-backwards-compatibility-by-tagging-pacts</a></p></div>
+<aside class="notes"><div class="paragraph"><p>pact test should be unit tests
+- <a href="https://github.com/DiUS/pact-jvm/issues/640#issuecomment-367525621">Source</a>
+- <a href="https://docs.pact.io/documentation/usage_ruby.html">Source2</a></p></div></aside></section><section id="sources"><h2>Sources</h2><div class="paragraph"><p><a href="https://dius.com.au/2014/05/19/simplifying-micro-service-testing-with-pacts/" class="bare">https://dius.com.au/2014/05/19/simplifying-micro-service-testing-with-pacts/</a>
+<a href="http://rea.tech/enter-the-pact-matrix-or-how-to-decouple-the-release-cycles-of-your-microservices/" class="bare">http://rea.tech/enter-the-pact-matrix-or-how-to-decouple-the-release-cycles-of-your-microservices/</a>
+<a href="https://dius.com.au/2016/02/03/pact-101-getting-started-with-pact-and-consumer-driven-contract-testing/" class="bare">https://dius.com.au/2016/02/03/pact-101-getting-started-with-pact-and-consumer-driven-contract-testing/</a>
+<a href="https://dius.com.au/2018/01/21/closing-the-loop-with-pact-verifications/" class="bare">https://dius.com.au/2018/01/21/closing-the-loop-with-pact-verifications/</a></p></div>
+<div class="paragraph"><p><a href="https://docs.pact.io/documentation/what_is_pact_good_for.html">What is pact good for and not</a></p></div>
+<div class="paragraph"><p><a href="https://github.com/pact-foundation">pact foundation</a>
+<a href="https://github.com/pact-foundation/pact-specification">pact specification</a>
+<a href="https://docs.pact.io/documentation/implementation_guides.html">Workshops</a>
+<a href="https://docs.pact.io/best_practices/">Best Practices</a>
+<a href="https://docs.pact.io/faq/">FAQ</a></p></div>
+<div class="paragraph"><p><a href="https://github.com/Mikuu/Pact-JVM-Example">Pact-JVM-Example</a></p></div></section><section id="pact_supported_languages"><h2>Pact: Supported languages</h2><div class="paragraph"><p><a href="https://docs.pact.io/" class="bare">https://docs.pact.io/</a></p></div></section><section id="pact_tools"><h2>Pact: Tools</h2><div class="paragraph"><p><a href="https://github.com/pact-foundation/README" class="bare">https://github.com/pact-foundation/README</a></p></div>
+<div class="paragraph"><p><a href="https://bitbucket.org/atlassian/swagger-mock-validator">swagger-mock-validator</a></p></div></section><section id="pact_what_changed_between_versions"><h2>Pact: What changed between versions</h2><div class="paragraph"><p>v1</p></div>
+<div class="paragraph"><p>v2</p></div>
+<div class="paragraph"><p>Auf 3:
+ provider state &#8594; provider states
+ message queues</p></div>
+<div class="admonitionblock caution"><table><tr><td class="icon"><i class="fa fa-fire" title="Caution"></i></td><td class="content">If you are writing tests on the Consumer side to a different language on the Provider side, you must ensure you use a common Pact Specification between them or you will be unable to validate.</td></tr></table></div></section><section id="pact_where_to_use_it"><h2>Pact: Where to use it</h2><div class="ulist"><ul><li><p>If you control code for the consumer and the provider</p></li><li><p>public apis are not suited, better of with Swagger documentation</p></li></ul></div></section><section id="pact_what_can_not_be_ensured_with_this_approach"><h2>Pact: What can not be ensured with this approach</h2><div class="ulist"><ul><li><p>Firewall rules and network connectivity</p></li></ul></div></section></section></div></div><script src="node_modules/reveal.js/lib/js/head.min.js"></script><script src="node_modules/reveal.js/js/reveal.js"></script><script>// See https://github.com/hakimel/reveal.js#configuration for a full list of configuration options
+Reveal.initialize({
+  // Display controls in the bottom right corner
+  controls: true,
+  // Display a presentation progress bar
+  progress: true,
+  // Set a per-slide timing for speaker notes, null means none
+  defaultTiming: null,
+  // Display the page number of the current slide
+  slideNumber: false,
+  // Push each slide change to the browser history
+  history: false,
+  // Enable keyboard shortcuts for navigation
+  keyboard: true,
+  // Enable the slide overview mode
+  overview: true,
+  // Vertical centering of slides
+  center: true,
+  // Enables touch navigation on devices with touch input
+  touch: true,
+  // Loop the presentation
+  loop: false,
+  // Change the presentation direction to be RTL
+  rtl: false,
+  // Randomizes the order of slides each time the presentation loads
+  shuffle: false,
+  // Turns fragments on and off globally
+  fragments: true,
+  // Flags if the presentation is running in an embedded mode,
+  // i.e. contained within a limited portion of the screen
+  embedded: false,
+  // Flags if we should show a help overlay when the questionmark
+  // key is pressed
+  help: true,
+  // Flags if speaker notes should be visible to all viewers
+  showNotes: false,
+  // Global override for autolaying embedded media (video/audio/iframe)
+  // - null: Media will only autoplay if data-autoplay is present
+  // - true: All media will autoplay, regardless of individual setting
+  // - false: No media will autoplay, regardless of individual setting
+  autoPlayMedia: null,
+  // Number of milliseconds between automatically proceeding to the
+  // next slide, disabled when set to 0, this value can be overwritten
+  // by using a data-autoslide attribute on your slides
+  autoSlide: 0,
+  // Stop auto-sliding after user input
+  autoSlideStoppable: true,
+  // Enable slide navigation via mouse wheel
+  mouseWheel: false,
+  // Hides the address bar on mobile devices
+  hideAddressBar: true,
+  // Opens links in an iframe preview overlay
+  previewLinks: false,
+  // Theme (e.g., beige, black, league, night, serif, simple, sky, solarized, white)
+  // NOTE setting the theme in the config no longer works in reveal.js 3.x
+  //theme: Reveal.getQueryHash().theme || 'black',
+  // Transition style (e.g., none, fade, slide, convex, concave, zoom)
+  transition: Reveal.getQueryHash().transition || 'slide',
+  // Transition speed (e.g., default, fast, slow)
+  transitionSpeed: 'default',
+  // Transition style for full page slide backgrounds (e.g., none, fade, slide, convex, concave, zoom)
+  backgroundTransition: 'fade',
+  // Number of slides away from the current that are visible
+  viewDistance: 3,
+  // Parallax background image (e.g., "'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg'")
+  parallaxBackgroundImage: '',
+  // Parallax background size in CSS syntax (e.g., "2100px 900px")
+  parallaxBackgroundSize: '',
+
+  // The "normal" size of the presentation, aspect ratio will be preserved
+  // when the presentation is scaled to fit different resolutions. Can be
+  // specified using percentage units.
+  width: 960,
+  height: 700,
+
+  // Factor of the display size that should remain empty around the content
+  margin: 0.1,
+
+  // Bounds for smallest/largest possible scale to apply to content
+  minScale: 0.2,
+  maxScale: 1.5,
+
+  // Optional libraries used to extend on reveal.js
+  dependencies: [
+      { src: 'node_modules/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+      { src: 'node_modules/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+      { src: 'node_modules/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+      
+      { src: 'node_modules/reveal.js/plugin/zoom-js/zoom.js', async: true },
+      { src: 'node_modules/reveal.js/plugin/notes/notes.js', async: true }
+  ]
+});</script></body></html>
